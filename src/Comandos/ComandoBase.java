@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Comandos;
 
+import Logica.Accion;
 import static Logica.Extensiones.ComandoBase;
 
 /**

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Comandos.IComando;
 import static Logica.Extensiones.ObtenerComando;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

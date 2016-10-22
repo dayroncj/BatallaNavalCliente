@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Comandos;
+
+import Logica.Accion;
 
 /**
  *
  * @author CG
  */
-public class ComandoDIS extends ComandoBase implements IComando {
+public class ComandoTUR extends ComandoBase implements IComando {
 
     public int turno;
-    public Posicion posicion;
 
-    protected ComandoDIS(String[] valores) {
+    public ComandoTUR(String[] valores) {
         this(valores[0],
                 Integer.parseInt(valores[1]),
                 Integer.parseInt(valores[2]),
@@ -22,21 +23,18 @@ public class ComandoDIS extends ComandoBase implements IComando {
                 Integer.parseInt(valores[4]),
                 Integer.parseInt(valores[5]),
                 Integer.parseInt(valores[6]),
-                Integer.parseInt(valores[8]),
-                new Posicion(Integer.parseInt(valores[9]), Integer.parseInt(valores[10])));
-
+                Integer.parseInt(valores[8]));
     }
 
-    protected ComandoDIS(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo, int turno, Posicion posicion) {
+    public ComandoTUR(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo, int turno) {
         super(aplicacion, año, mes, dia, hora, minuto, segundo);
 
         if (turno < 0 || turno > 1) {
             throw new IllegalArgumentException("Turno debe ser 0 o 1!");
         }
 
-        this.accion = Accion.Disparar;
+        this.accion = Accion.CambiarTurno;
         this.turno = turno;
-        this.posicion = posicion;
     }
 
     @Override

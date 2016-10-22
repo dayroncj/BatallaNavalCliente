@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Comandos;
 
+import Logica.Accion;
+import Logica.Coordenada;
 import static Logica.Extensiones.ComandoBase;
 import static Logica.Extensiones.EsNuloOVacio;
 
@@ -16,7 +18,7 @@ public class Comando {
 
     public Accion Accion;
     public int Turno;
-    public Posicion Posicion;
+    public Coordenada Posicion;
     public boolean Exitoso;
 
     public boolean isExitoso() {
@@ -37,7 +39,7 @@ public class Comando {
         this.Turno = turno;
     }
 
-    public Comando(Accion accion, int turno, Posicion posicion) {
+    public Comando(Accion accion, int turno, Coordenada posicion) {
         this.Accion = accion;
         this.Turno = turno;
         this.Posicion = posicion;

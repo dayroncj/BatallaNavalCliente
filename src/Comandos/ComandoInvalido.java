@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Comandos;
 
-import static Logica.Extensiones.ComandoBase;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import Logica.Accion;
 
 /**
  *
@@ -16,16 +13,16 @@ import java.util.GregorianCalendar;
  */
 public class ComandoInvalido extends ComandoBase implements IComando {
 
-    protected ComandoInvalido() {
+    public ComandoInvalido() {
         this("BNAV", 2016, 9, 20, 22, 6, 28);
     }
     
-    protected ComandoInvalido(Accion accion) {
+    public ComandoInvalido(Accion accion) {
         this("BNAV", 2016, 9, 20, 22, 6, 28);
         this.accion = accion;
     }
 
-    protected ComandoInvalido(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo) {
+    public ComandoInvalido(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo) {
         super(aplicacion, año, mes, dia, hora, minuto, segundo);
         this.accion = Accion.Invalida;
     }

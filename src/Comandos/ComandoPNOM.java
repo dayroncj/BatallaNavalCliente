@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Comandos;
 
-import static Logica.Extensiones.ComandoBase;
+import Logica.Accion;
 
 /**
  *
@@ -13,7 +13,7 @@ import static Logica.Extensiones.ComandoBase;
  */
 public class ComandoPNOM extends ComandoBase implements IComando {
 
-    protected ComandoPNOM(String[] valores) {
+    public ComandoPNOM(String[] valores) {
         super(valores[0],
                 Integer.parseInt(valores[1]),
                 Integer.parseInt(valores[2]),
@@ -25,7 +25,7 @@ public class ComandoPNOM extends ComandoBase implements IComando {
         this.accion = Accion.DecirNombre;
     }
 
-    protected ComandoPNOM(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo) {
+    public ComandoPNOM(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo) {
         super(aplicacion, año, mes, dia, hora, minuto, segundo);
         this.accion = Accion.DecirNombre;
     }

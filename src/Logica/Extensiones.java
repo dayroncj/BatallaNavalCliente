@@ -5,6 +5,12 @@
  */
 package Logica;
 
+import Comandos.ComandoPNOM;
+import Comandos.ComandoLIS;
+import Comandos.ComandoTUR;
+import Comandos.ComandoDIS;
+import Comandos.ComandoInvalido;
+import Comandos.IComando;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,7 +42,8 @@ public class Extensiones {
     public static IComando ObtenerComando(String textoComando) {
         String[] valores = textoComando.trim().split(",");
         Accion accion = findEnumValue(valores[7]);
-        IComando comando = new ComandoInvalido(accion);
+        IComando comando;
+        comando = new ComandoInvalido(accion);
 
         try {
             switch (accion) {

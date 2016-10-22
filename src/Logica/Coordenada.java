@@ -9,12 +9,12 @@ package Logica;
  *
  * @author CG
  */
-public class Posicion {
+public class Coordenada {
 
-    public int X;
-    public int Y;
+    public int EjeX;
+    public int EjeY;
 
-    public Posicion(int x, int y) {
+    public Coordenada(int x, int y) {
         if (x < 1 || x > 10) {
             throw new IllegalArgumentException("Posición X debe estar entre 1 y 10!");
         }
@@ -23,19 +23,19 @@ public class Posicion {
             throw new IllegalArgumentException("Posición Y debe estar entre 1 y 10!");
         }
         
-        this.X = x;
-        this.Y = y;
+        this.EjeX = x;
+        this.EjeY = y;
     }
 
     public String ToString() {
         String texto = "";
 
-        if (this.X > 0) {
-            texto = texto + this.X;
+        if (this.EjeX > 0) {
+            texto = texto + this.EjeX;
         }
 
-        if (this.Y > 0) {
-            texto = texto + "," + this.Y;
+        if (this.EjeY > 0) {
+            texto = texto + "," + this.EjeY;
         }
         
         return texto;

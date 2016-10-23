@@ -30,11 +30,11 @@ public class Coordenada {
      * @param y
      */
     public Coordenada(int x, int y) {
-        if (x < 1 || x > 10) {
+        if (x < 0 || x > 10) {
             throw new IllegalArgumentException("Posición X debe estar entre 1 y 10!");
         }
 
-        if (y < 1 || y > 10) {
+        if (y < 0 || y > 10) {
             throw new IllegalArgumentException("Posición Y debe estar entre 1 y 10!");
         }
 

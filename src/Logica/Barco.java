@@ -30,9 +30,9 @@ public class Barco {
             this.coordenadas = CalcularRango(this, coordenadas);
             }
     
-    public Barco(BarcoTipo tipo) {
+    public Barco(BarcoTipo tipo, Orientacion orientacion) {
         this.tipo = tipo;
-        this.orientacion = Orientacion.Horizontal;
+        this.orientacion = orientacion;
        
     }
      

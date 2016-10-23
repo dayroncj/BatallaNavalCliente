@@ -15,6 +15,7 @@ public class Coordenada {
     public int EjeY;
     public boolean Impacto;
 
+
     public boolean isImpacto() {
         return Impacto;
     }
@@ -23,6 +24,11 @@ public class Coordenada {
         this.Impacto = Impacto;
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Coordenada(int x, int y) {
         if (x < 1 || x > 10) {
             throw new IllegalArgumentException("Posición X debe estar entre 1 y 10!");

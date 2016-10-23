@@ -24,6 +24,12 @@ public class Barco {
         //this.coordenadas = new Coordenada[tipo.getTamaño()];
        this.coordenadas = CalcularRango(this, inicial);
     }
+    
+    public void SetCoordenada(Coordenada coordenadas)
+            {
+            this.coordenadas = CalcularRango(this, coordenadas);
+            }
+    
     public Barco(BarcoTipo tipo) {
         this.tipo = tipo;
         this.orientacion = Orientacion.Horizontal;
@@ -57,7 +63,8 @@ public class Barco {
     
      public boolean CoordenadaCoincide(short CoordenadaX, short CoordenadaY) {
         boolean coincide=false;
-        for (Coordenada casillas: coordenadas ) {
+         if (coordenadas!=null) {
+                for (Coordenada casillas: coordenadas ) {
             if (casillas!=null){
             coincide=casillas.EjeX==CoordenadaX && casillas.EjeY==CoordenadaY;
             }
@@ -65,6 +72,8 @@ public class Barco {
                 break;
             }
         }
+         }
+     
         return coincide;
     }
 }

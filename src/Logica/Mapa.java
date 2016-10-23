@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -150,9 +152,12 @@ public class Mapa {
                     if ((barco.getOrientacion() == Orientacion.Horizontal && Short.parseShort(coordenadas[0]) + barco.tipo.getTamaño() - 1 < CasillasEjeX) || (barco.getOrientacion() == Orientacion.Vertical && Short.parseShort(coordenadas[1]) + barco.tipo.getTamaño() - 1 < CasillasEjeY)) {
                         int i = 0;
                         if (barco.getOrientacion() == Orientacion.Horizontal) {
+                            Coordenada cor = new Coordenada((short) (Short.parseShort(coordenadas[0]) + i), Short.parseShort(coordenadas[1]));
+                             barco.SetCoordenada(cor);
+
                             while (i < barco.tipo.getTamaño()) {
-                                Coordenada cor = new Coordenada((short) (Short.parseShort(coordenadas[0]) + i), Short.parseShort(coordenadas[1]));
-                                barco.getCoordenadas()[i] = cor;
+                                //Coordenada cor = new Coordenada((short) (Short.parseShort(coordenadas[0]) + i), Short.parseShort(coordenadas[1]));
+                                //barco.getCoordenadas()[i] = cor;
                                 mapa[Short.parseShort(coordenadas[0]) + i][Short.parseShort(coordenadas[1])].setBackground(Color.yellow);
                                 i++;
                             }
@@ -242,7 +247,7 @@ public class Mapa {
     }
 
     public boolean IsBarcosListos() {
-        return barcos[barcos.length - 1].getCoordenadas()[0] != null;
+        return barcos[barcos.length - 1].coordenadas != null;
     }
 
 }

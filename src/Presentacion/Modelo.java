@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import Logica.Mapa;
 import Logica.ServidorSocket;
 
 /**
@@ -13,14 +14,24 @@ import Logica.ServidorSocket;
  */
 public class Modelo {
 
+    public Mapa mapa;
     private ServidorSocket servidor;
 
     public void iniciar() {
         try {
-            getServidor().Escuchar();
+            getMapa().CargarBarcos();
+            getServidor().Escuchar(mapa);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public Mapa getMapa() {
+        if (mapa == null) {
+            mapa = new Mapa();
+        }
+
+        return mapa;
     }
 
     public ServidorSocket getServidor() {

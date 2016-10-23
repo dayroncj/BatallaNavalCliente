@@ -100,4 +100,24 @@ public class Extensiones {
 
         return Accion.Invalida;
     }
+
+    public static Coordenada[] CalcularRango(Barco barco, Coordenada inicial) {
+        byte cantidad = barco.tipo.getTamaño();
+        Coordenada[] coordenadas = new Coordenada[cantidad];
+        coordenadas[0] = inicial;
+
+        if (barco.orientacion == Orientacion.Horizontal) {
+            for (int i = 1; i < cantidad; i++) {
+                coordenadas[i] = new Coordenada(inicial.EjeX + i, inicial.EjeY);
+            }
+        }
+
+        if (barco.orientacion == Orientacion.Vertical) {
+            for (int i = 1; i < cantidad; i++) {
+                coordenadas[i] = new Coordenada(inicial.EjeX, inicial.EjeY + i);
+            }
+        }
+
+        return coordenadas;
+    }
 }

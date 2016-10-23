@@ -7,6 +7,7 @@ package Comandos;
 
 import Logica.Accion;
 import static Logica.Extensiones.ComandoBase;
+import Logica.Mapa;
 
 /**
  *
@@ -23,6 +24,15 @@ public class ComandoBase {
     public int segundo;
     public Accion accion;
     public String resultado;
+    public Mapa mapa;
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Mapa mapa) {
+        this.mapa = mapa;
+    }
 
     public ComandoBase(String aplicacion, int año, int mes, int dia, int hora, int minuto, int segundo) {
         this.aplicacion = aplicacion;

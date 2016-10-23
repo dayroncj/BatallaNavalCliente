@@ -26,7 +26,7 @@ public class ServidorSocket {
         hayClienteConectado = false;
     }
 
-    public void Escuchar() throws Exception {
+    public void Escuchar(Mapa mapa) throws Exception {
         servidor = new ServerSocket(9000);
 
         while (escuchando) {
@@ -34,7 +34,7 @@ public class ServidorSocket {
             hayClienteConectado = true;
 
             try {
-                FlujoCliente clienteNuevo = new FlujoCliente(cliente);
+                FlujoCliente clienteNuevo = new FlujoCliente(mapa, cliente);
                 clienteNuevo.start();
             } catch (Exception e) {
                 e.printStackTrace();

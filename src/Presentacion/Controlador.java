@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Comandos;
+package Presentacion;
 
 import Logica.Mapa;
 
@@ -11,13 +11,6 @@ import Logica.Mapa;
  *
  * @author CG
  */
-public interface IComando {
-
-    Mapa getMapa();
+public class Controlador {
     
-    void setMapa(Mapa mapa);
-    
-    String Procesar();
-
-    String ToString();
 }

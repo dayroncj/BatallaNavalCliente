@@ -19,16 +19,19 @@ import java.util.Collections;
  */
 public class FlujoCliente extends Thread {
 
+    private final Mapa mapa;
     private final DataInputStream datosEntrada;
     private final DataOutputStream datosSalida;
     private final Socket cliente;
 
-    public FlujoCliente(Socket cliente) throws IOException {
+    public FlujoCliente(Mapa mapa, Socket cliente) throws IOException {
+        this.mapa = mapa;
         this.cliente = cliente;
         datosEntrada = new DataInputStream(cliente.getInputStream());
         datosSalida = new DataOutputStream(cliente.getOutputStream());
     }
 
+    @Override
     public void run() {
         System.out.println(String.join("-", Collections.nCopies(23, "-")));
         byte buffer[];
@@ -37,23 +40,13 @@ public class FlujoCliente extends Thread {
         try {
             datosEntrada.read(buffer);
             System.out.println("El cliente dice: " + new String(buffer));
-            
+
             IComando comando = ObtenerComando(new String(buffer));
+            comando.setMapa(mapa);
             String respuesta = comando.Procesar();
             datosSalida.write(respuesta.getBytes());
             System.out.println("El servidor dijo: " + respuesta);
-            
-            //datosSalida.write("Hola oponente".getBytes());
-            /*Comando cmd = new Comando(Accion.DecirNombre);
-            datosSalida.write(cmd.ToString().getBytes());
 
-            Comando cmd2 = new Comando(Accion.CambiarTurno, 1);
-            datosSalida.write(cmd2.ToString().getBytes());
-
-            Posicion pos = new Posicion(5, 8);
-            Comando cmd3 = new Comando(Accion.Disparar, 1, pos);
-            datosSalida.write(cmd3.ToString().getBytes());
-*/
             datosSalida.close();
             datosEntrada.close();
             //cliente.close();

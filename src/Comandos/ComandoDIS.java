@@ -7,6 +7,7 @@ package Comandos;
 
 import Logica.Accion;
 import Logica.Coordenada;
+import Logica.Mapa;
 
 /**
  *
@@ -15,7 +16,7 @@ import Logica.Coordenada;
 public class ComandoDIS extends ComandoBase implements IComando {
 
     public int turno;
-    public Coordenada posicion;
+    public Coordenada coordenada;
 
     public ComandoDIS(String[] valores) {
         this(valores[0],
@@ -39,12 +40,18 @@ public class ComandoDIS extends ComandoBase implements IComando {
 
         this.accion = Accion.Disparar;
         this.turno = turno;
-        this.posicion = posicion;
+        this.coordenada = posicion;
     }
 
     @Override
     public String Procesar() {
-        this.resultado = "OK";
+        // Identificar que el disparo no sea en una coordenada ya impactada.
+        if (this.mapa.coordenadasImpactadas.contains(coordenada)) {
+            this.resultado = "NK,3";
+            return this.ToString();
+        }
+        
+        this.resultado = "OK,0";
         return this.ToString();
     }
 }

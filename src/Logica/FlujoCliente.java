@@ -23,6 +23,7 @@ public class FlujoCliente extends Thread {
     private final DataInputStream datosEntrada;
     private final DataOutputStream datosSalida;
     private final Socket cliente;
+   
 
     public FlujoCliente(Mapa mapa, Socket cliente) throws IOException {
         this.mapa = mapa;

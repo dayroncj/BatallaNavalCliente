@@ -22,8 +22,14 @@ public class Barco {
         this.tipo = tipo;
         this.orientacion = Orientacion.Horizontal;
         //this.coordenadas = new Coordenada[tipo.getTamaño()];
-        this.coordenadas = CalcularRango(this, inicial);
+       this.coordenadas = CalcularRango(this, inicial);
     }
+    public Barco(BarcoTipo tipo) {
+        this.tipo = tipo;
+        this.orientacion = Orientacion.Horizontal;
+       
+    }
+     
 
     public Orientacion getOrientacion() {
         return orientacion;
@@ -47,5 +53,18 @@ public class Barco {
 
     public void setHundido(boolean hundido) {
         this.hundido = hundido;
+    }
+    
+     public boolean CoordenadaCoincide(short CoordenadaX, short CoordenadaY) {
+        boolean coincide=false;
+        for (Coordenada casillas: coordenadas ) {
+            if (casillas!=null){
+            coincide=casillas.EjeX==CoordenadaX && casillas.EjeY==CoordenadaY;
+            }
+            if (coincide) {
+                break;
+            }
+        }
+        return coincide;
     }
 }

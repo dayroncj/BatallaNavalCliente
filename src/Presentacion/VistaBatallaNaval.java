@@ -69,7 +69,7 @@ public class VistaBatallaNaval extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Client");
+        setTitle("Servidor");
 
         jPanel1.setForeground(new java.awt.Color(240, 240, 240));
         jPanel1.setPreferredSize(new java.awt.Dimension(430, 450));

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Presentacion.VistaBatallaNaval;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,14 +29,20 @@ public class Mapa {
     private JButton[][] mapa;
     private short CasillasEjeX;
     private short CasillasEjeY;
+
+    public JButton[][] getMapa() {
+        return mapa;
+    }
     private short jugador;
     private SistemaServer sistema;
     private short TamanoCasillas;
     private JPanel panel;
     private JLabel NombreMapa;
 
+
     public Mapa() {
         this.barcos = new Barco[10];
+        
     }
 
     public Mapa(short CasillasEjeX, short CasillasEjeY, JPanel panel, short TamanoCasillas, String NombreMapa, short jugador, SistemaServer sistema) {
@@ -117,7 +124,11 @@ public class Mapa {
                             try {
                                 if (sistema.isTurno()) {
                                     sistema.setTurno(false);
-                                    sistema.EnviarMensaje(event.getActionCommand().toString(), mapa[Integer.parseInt(coordenadas[0])][Integer.parseInt(coordenadas[0])], event.getActionCommand().toString());
+                                     sistema.setBarcosEnemigos(mapa);
+                                    sistema.EnviarMensaje(event.getActionCommand(), mapa[Integer.parseInt(coordenadas[0])][Integer.parseInt(coordenadas[1])],new Coordenada(Integer.parseInt(coordenadas[0]),Integer.parseInt(coordenadas[1])));
+                                }else
+                                {
+                                JOptionPane.showMessageDialog(null, "Por Favor espere su turno", "Mensaje", JOptionPane.WARNING_MESSAGE);
                                 }
 
                             } catch (Exception ex) {
@@ -193,7 +204,7 @@ public class Mapa {
         if (IsBarcosListos()) {
             try {
                   JOptionPane.showMessageDialog(null, "Buscando rival...", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);
-                sistema.escuchar();
+                sistema.escuchar(this);
                 sistema.start();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -208,8 +219,9 @@ public class Mapa {
         for (Barco barco : barcos) {
             if (barco.CoordenadaCoincide(CoordenadaX, CoordenadaY)) {
                 existe = true;
+                  break;
             }
-            break;
+          
         }
         return existe;
     }

@@ -20,6 +20,24 @@ public class Modelo {
     private ServidorSocket servidor;
     private VistaBatallaNaval ventana;
     private SistemaServer sistema;
+     private Mapa MisBarcos;
+     private  Mapa BarcosEnemigos;
+
+    public Mapa getBarcosEnemigos() {
+        return BarcosEnemigos;
+    }
+
+    public void setBarcosEnemigos(Mapa BarcosEnemigos) {
+        this.BarcosEnemigos = BarcosEnemigos;
+    }
+
+    public Mapa getMisBarcos() {
+        return MisBarcos;
+    }
+
+    public void setMisBarcos(Mapa MisBarcos) {
+        this.MisBarcos = MisBarcos;
+    }
 
     public VistaBatallaNaval getVentana() {
         if (ventana == null) {
@@ -37,8 +55,8 @@ public class Modelo {
 
     public void iniciar() {
         try {
-            Mapa MisBarcos = new Mapa((short) 10, (short) 10, getVentana().getjPanel1(), (short) 30, "Mi Mapa", (short) 0, getSistema());
-            Mapa BarcosEnemigos = new Mapa((short) 10, (short) 10, getVentana().getjPanel2(), (short) 30, "Rival", (short) 1, getSistema());
+            MisBarcos = new Mapa((short) 10, (short) 10, getVentana().getjPanel1(), (short) 30, "Mi Mapa", (short) 0, getSistema());
+            BarcosEnemigos = new Mapa((short) 10, (short) 10, getVentana().getjPanel2(), (short) 30, "Rival", (short) 1, getSistema());
             MisBarcos.PintarMapa();
             BarcosEnemigos.PintarMapa();
             JOptionPane.showMessageDialog(null, "Seleccione sus barcos", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);

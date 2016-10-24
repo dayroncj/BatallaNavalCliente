@@ -52,8 +52,8 @@ public class Comando {
             comando = comando + "," + this.Turno;
         }
 
-        if (this.Posicion != null && !EsNuloOVacio(this.Posicion.ToString())) {
-            comando = comando + "," + this.Posicion.ToString();
+        if (this.Posicion != null && !EsNuloOVacio(this.Posicion.EjeX + "," + this.Posicion.EjeY)) {
+            comando = comando + "," + this.Posicion.EjeX+ "," + this.Posicion.EjeY;
         }
 
         return comando;

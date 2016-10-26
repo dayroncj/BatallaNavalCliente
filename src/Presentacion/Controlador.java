@@ -41,4 +41,17 @@ public class Controlador implements ActionListener {
         //this.Jugar();
         ventana.getModelo().Jugar();
     }
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
+/**
+ *
+ * @author CG
+ */
+public class Controlador  {
+  
+    
 }

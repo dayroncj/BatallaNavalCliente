@@ -4,6 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>BatallaNaval</name>
+            <name>BatallaNavalCliente</name>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

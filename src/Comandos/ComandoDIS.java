@@ -7,7 +7,6 @@ package Comandos;
 
 import Logica.Accion;
 import Logica.Coordenada;
-import Logica.Mapa;
 
 /**
  *
@@ -50,7 +49,7 @@ public class ComandoDIS extends ComandoBase implements IComando {
             this.resultado = "NK,3";
             return this.ToString();
         }
-        
+
         this.resultado = "OK,0";
         return this.ToString();
     }

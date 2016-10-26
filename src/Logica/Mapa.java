@@ -25,36 +25,29 @@ import javax.swing.JPanel;
 public class Mapa {
 
     public Barco[] barcos;
+    public HashSet<Barco> barcos_;
     public List<Coordenada> coordenadasImpactadas = new ArrayList<>();
     private JButton[][] mapa;
-    private short CasillasEjeX;
-    private short CasillasEjeY;
 
     public JButton[][] getMapa() {
         return mapa;
     }
     private short jugador;
     private SistemaServer sistema;
-    private short TamanoCasillas;
     private JPanel panel;
-    private JLabel NombreMapa;
-
+    private JLabel nombre;
+    private byte tamano = 10;
+    private byte tamanoTotal = 30;
 
     public Mapa() {
         this.barcos = new Barco[10];
-        
     }
 
-    public Mapa(short CasillasEjeX, short CasillasEjeY, JPanel panel, short TamanoCasillas, String NombreMapa, short jugador, SistemaServer sistema) {
+    public Mapa(JPanel panel, String nombre, short jugador, SistemaServer sistema) {
         this.panel = panel;
-        this.CasillasEjeX = CasillasEjeX;
-        this.CasillasEjeY = CasillasEjeY;
-        this.TamanoCasillas = TamanoCasillas;
-        this.NombreMapa = new JLabel(NombreMapa);
+        this.nombre = new JLabel(nombre);
         this.jugador = jugador;
         this.sistema = sistema;
-        // panel.setLayout(new GridLayout(9, 10));
-
     }
 
     public Barco[] getBarcos() {
@@ -105,12 +98,12 @@ public class Mapa {
         setBarcos(barcos);
     }
 
-    public void PintarMapa() {
-
+    public void Pintar() {
         IniciarBarcos();
-        mapa = new JButton[CasillasEjeX][CasillasEjeY];
-        for (int i = 0; i < CasillasEjeX; i++) {
-            for (int j = 0; j < CasillasEjeY; j++) {
+        mapa = new JButton[this.tamano][this.tamano];
+
+        for (int i = 0; i < this.tamano; i++) {
+            for (int j = 0; j < this.tamano; j++) {
                 mapa[i][j] = new JButton();
                 mapa[i][j].setName(i + "," + j);
                 mapa[i][j].setActionCommand(i + "," + j);
@@ -118,56 +111,52 @@ public class Mapa {
                 mapa[i][j].addActionListener((new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         String[] coordenadas = event.getActionCommand().toString().split(",");
+                        
                         if (jugador == 0) {
                             EnviarCoordenadasBarcos(coordenadas);
                         } else if (jugador == 1) {
                             try {
                                 if (sistema.isTurno()) {
                                     sistema.setTurno(false);
-                                     sistema.setBarcosEnemigos(mapa);
-                                    sistema.EnviarMensaje(event.getActionCommand(), mapa[Integer.parseInt(coordenadas[0])][Integer.parseInt(coordenadas[1])],new Coordenada(Integer.parseInt(coordenadas[0]),Integer.parseInt(coordenadas[1])));
-                                }else
-                                {
-                                JOptionPane.showMessageDialog(null, "Por Favor espere su turno", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                                    sistema.setBarcosEnemigos(mapa);
+                                    sistema.EnviarMensaje(event.getActionCommand(), mapa[Integer.parseInt(coordenadas[0])][Integer.parseInt(coordenadas[1])], new Coordenada(Integer.parseInt(coordenadas[0]), Integer.parseInt(coordenadas[1])));
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Por Favor espere su turno", "Mensaje", JOptionPane.WARNING_MESSAGE);
                                 }
-
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
                         }
-
                     }
                 }));
 
-                mapa[i][j].setLocation(i * TamanoCasillas, j * TamanoCasillas);
-                mapa[i][j].setSize(TamanoCasillas, TamanoCasillas);
+                mapa[i][j].setLocation(i * this.tamanoTotal, j * this.tamanoTotal);
+                mapa[i][j].setSize(this.tamanoTotal, this.tamanoTotal);
                 panel.add(mapa[i][j]);
                 panel.validate();
             }
         }
 
-        NombreMapa.setSize(500, 500);
-        NombreMapa.setLocation(mapa.length * TamanoCasillas / 2, mapa.length * TamanoCasillas);
-        NombreMapa.setSize(NombreMapa.getPreferredSize());
-        panel.add(NombreMapa);
+        nombre.setSize(500, 500);
+        nombre.setLocation(mapa.length * this.tamanoTotal / 2, mapa.length * this.tamanoTotal);
+        nombre.setSize(nombre.getPreferredSize());
+        panel.add(nombre);
         panel.validate();
-
     }
 
     public void EnviarCoordenadasBarcos(String[] coordenadas) {
-
         for (Barco barco : barcos) {
             if (barco.coordenadas == null) {
                 if (!ExisteCoordenadaBarcos(Short.parseShort(coordenadas[0]), Short.parseShort(coordenadas[1]), barco.tipo.getTamaño(), barco.orientacion)) {
-
-                    if ((barco.getOrientacion() == Orientacion.Horizontal && Short.parseShort(coordenadas[0]) + barco.tipo.getTamaño() - 1 < CasillasEjeX) || (barco.getOrientacion() == Orientacion.Vertical && Short.parseShort(coordenadas[1]) + barco.tipo.getTamaño() - 1 < CasillasEjeY)) {
+                    if ((barco.getOrientacion() == Orientacion.Horizontal && Short.parseShort(coordenadas[0]) + barco.tipo.getTamaño() - 1 < this.tamano) || (barco.getOrientacion() == Orientacion.Vertical && Short.parseShort(coordenadas[1]) + barco.tipo.getTamaño() - 1 < this.tamano)) {
                         int i = 0;
+
                         if (barco.getOrientacion() == Orientacion.Horizontal) {
-//                            Coordenada cor = new Coordenada((short) (Short.parseShort(coordenadas[0]) + i), Short.parseShort(coordenadas[1]));
-//                             barco.SetCoordenada(cor);
+
                             if (barco.coordenadas == null) {
                                 barco.coordenadas = new Coordenada[barco.tipo.getTamaño()];
                             }
+
                             while (i < barco.tipo.getTamaño()) {
                                 Coordenada cor = new Coordenada((short) (Short.parseShort(coordenadas[0]) + i), Short.parseShort(coordenadas[1]));
 
@@ -198,18 +187,16 @@ public class Mapa {
                 System.out.println("No vacio");
                 // break;
             }
-
         }
 
         if (IsBarcosListos()) {
             try {
-                  JOptionPane.showMessageDialog(null, "Buscando rival...", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Buscando rival...", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);
                 sistema.escuchar(this);
                 sistema.start();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
 
     }
@@ -219,9 +206,8 @@ public class Mapa {
         for (Barco barco : barcos) {
             if (barco.CoordenadaCoincide(CoordenadaX, CoordenadaY)) {
                 existe = true;
-                  break;
+                break;
             }
-          
         }
         return existe;
     }

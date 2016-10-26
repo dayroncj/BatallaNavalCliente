@@ -5,11 +5,8 @@
  */
 package Presentacion;
 
-
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 
 /**
  *
@@ -35,26 +32,26 @@ public class VistaBatallaNaval extends javax.swing.JFrame {
     public JButton[][] getPosicionesMiMapa() {
         return posicionesMiMapa;
     }
-   // private Controlador control;
+
+    private Controlador control;
     private Modelo modelo;
 
     public VistaBatallaNaval(Modelo aThis) {
         modelo = aThis;
         initComponents();
-        
     }
 
     public Modelo getModelo() {
         return modelo;
     }
 
-//    public Controlador getControl() {
-//        if (control == null) {
-//            control = new Controlador(this);
-//        }
-//        return control;
-//    }
-//      
+    public Controlador getControl() {
+        if (control == null) {
+            control = new Controlador(this);
+        }
+
+        return control;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +158,5 @@ public class VistaBatallaNaval extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
-
-   
 
 }

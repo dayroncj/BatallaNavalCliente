@@ -15,13 +15,16 @@ public class Coordenada {
     public int EjeY;
     public boolean Impacto;
 
-
     public boolean isImpacto() {
         return Impacto;
     }
 
     public void setImpacto(boolean Impacto) {
         this.Impacto = Impacto;
+    }
+
+    public Coordenada(String[] valores) {
+        this(Integer.parseInt(valores[0]), Integer.parseInt(valores[1]));
     }
 
     /**
@@ -55,16 +58,14 @@ public class Coordenada {
 
         return texto;
     }
-    
+
     @Override
-    public boolean equals(Object otra)
-    {
+    public boolean equals(Object otra) {
         boolean equal = false;
 
-        if (otra != null && otra instanceof Coordenada)
-        {
-            equal = (this.EjeX == ((Coordenada)otra).EjeX 
-                    && this.EjeY == ((Coordenada)otra).EjeY);
+        if (otra != null && otra instanceof Coordenada) {
+            equal = (this.EjeX == ((Coordenada) otra).EjeX
+                    && this.EjeY == ((Coordenada) otra).EjeY);
         }
 
         return equal;

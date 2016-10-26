@@ -16,37 +16,37 @@ import Logica.SistemaServer;
  */
 public class Modelo {
 
-    public Mapa mapa;
+    private Mapa MiMapa;
+    private Mapa MapaRival;
     private ServidorSocket servidor;
-    private VistaBatallaNaval ventana;
     private SistemaServer sistema;
-     private Mapa MisBarcos;
-     private  Mapa BarcosEnemigos;
+    private VistaBatallaNaval ventana;
 
-    public Mapa getBarcosEnemigos() {
-        return BarcosEnemigos;
+    public Mapa getMiMapa() {
+        return MiMapa;
     }
 
-    public void setBarcosEnemigos(Mapa BarcosEnemigos) {
-        this.BarcosEnemigos = BarcosEnemigos;
+    public void setMiMapa(Mapa MiMapa) {
+        this.MiMapa = MiMapa;
     }
 
-    public Mapa getMisBarcos() {
-        return MisBarcos;
+    public Mapa getMapaRival() {
+        return MapaRival;
     }
 
-    public void setMisBarcos(Mapa MisBarcos) {
-        this.MisBarcos = MisBarcos;
+    public void setMapaRival(Mapa MapaRival) {
+        this.MapaRival = MapaRival;
     }
 
     public VistaBatallaNaval getVentana() {
         if (ventana == null) {
             ventana = new VistaBatallaNaval(this);
         }
+
         return ventana;
     }
-    
-     public SistemaServer getSistema() {
+
+    public SistemaServer getSistema() {
         if (sistema == null) {
             sistema = new SistemaServer();
         }
@@ -55,24 +55,25 @@ public class Modelo {
 
     public void iniciar() {
         try {
-            MisBarcos = new Mapa((short) 10, (short) 10, getVentana().getjPanel1(), (short) 30, "Mi Mapa", (short) 0, getSistema());
-            BarcosEnemigos = new Mapa((short) 10, (short) 10, getVentana().getjPanel2(), (short) 30, "Rival", (short) 1, getSistema());
-            MisBarcos.PintarMapa();
-            BarcosEnemigos.PintarMapa();
-            JOptionPane.showMessageDialog(null, "Seleccione sus barcos", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);
+            MiMapa = new Mapa(getVentana().getjPanel1(), "Mi Mapa", (short) 0, getSistema());
+            MapaRival = new Mapa(getVentana().getjPanel2(), "Rival", (short) 1, getSistema());
+            MiMapa.Pintar();
+            MapaRival.Pintar();
             getVentana().setSize(1000, 600);
             getVentana().setVisible(true);
-           } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Seleccione sus barcos", "Mensaje de Inicio", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public Mapa getMapa() {
-        if (mapa == null) {
-            mapa = new Mapa();
-        }
+    public void Jugar() {
+        try {
+            getSistema().escuchar(this.MiMapa);
 
-        return mapa;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public ServidorSocket getServidor() {
